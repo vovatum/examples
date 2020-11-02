@@ -26,10 +26,11 @@ export const Example1 = () => {
     const [counter, setCounter] = useState(-4)
     const [users, setUsers] = useState(['user', 'user', 'user'])
     const addUser = () => {
+        // users.push('user') //добавляет user, но не отображает, так нарушено правило инмьютабельности
+        // setUsers(users)
         const newUsers = [...users, 'user']
         setUsers(newUsers)
     }
-    users.push('user') //добавляет user, но не отображает
 
     return <>
         <button onClick={() => setCounter(counter + 1)}>+1</button>
