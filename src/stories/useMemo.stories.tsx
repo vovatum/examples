@@ -4,7 +4,7 @@ export default {
     title: 'useMemo'
 }
 
-export const Example1 = () => {
+export const DifficultCounting = () => {
     const [a, setA] = useState(5)
     const [b, setB] = useState(5)
     let factorialA = 1
@@ -13,7 +13,7 @@ export const Example1 = () => {
         let tempValue = factorialA
         for (let i = 1; i <= a; i++) {
             let fake = 0;
-            while (fake < 700000000)  {
+            while (fake < 700000000) {
                 fake++
             }
             tempValue *= i
@@ -33,5 +33,37 @@ export const Example1 = () => {
                 setB(+event.currentTarget.value)}/>
             <span>FactorialB ={factorialB}</span>
         </div>
+    </>
+}
+
+const Users = (props: { users: Array<string> }) => {
+    console.log('Users')
+    return <div>{
+        props.users.map((user, index) =>
+            <div key={index}>
+                {user}-{index}
+            </div>
+        )
+    }</div>
+}
+const MemoUsers = React.memo(Users)
+
+export const HelpReactMemo = () => {
+    console.log('HelpReactMemo')
+    const [counter, setCounter] = useState(-4)
+    const [users, setUsers] = useState(['Vova', 'Adil', 'user'])
+    const memoizedUsers = useMemo(() => {
+        return users.filter(user => user.toLowerCase().indexOf('a') > -1)
+    }, [users])
+    //фильрация каждый раз создаёт новый объект и реакт реагирует
+    //на создание новой ссылки и отрисовывает компоненту заново
+    //useMemo защищает от перерисовки
+    const addUser = () => setUsers([...users, 'Aa'])
+
+    return <>
+        <button onClick={() => setCounter(counter + 1)}>+1</button>
+        {counter}
+        <button onClick={addUser}>+user</button>
+        <MemoUsers users={memoizedUsers}/>
     </>
 }
