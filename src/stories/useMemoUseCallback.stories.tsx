@@ -1,4 +1,4 @@
-import React, {useMemo, useState} from "react";
+import React, {useCallback, useMemo, useState} from "react";
 
 export default {
     title: 'useMemo'
@@ -72,17 +72,31 @@ export const UseCallbackLikeUseState = () => {
     console.log('UseCallbackLikeUseState')
     const [counter, setCounter] = useState(80)
     const [books, setBooks] = useState(['HTML', 'CSS', 'JS'])
-    const addBook = () => setBooks([...books, 'Algorithms'])
+    const addBook = () => {
+        console.log(books)
+        setBooks([...books, 'Algorithms'])
+    }
+    const memoizedAddBook = useMemo(() => {
+        return () => { //возвращает addBook
+            console.log(books)
+            setBooks([...books, 'Algorithms'])
+        }
+    }, [books])
+    const memoizedAddBook2 = useCallback(() => { //синтаксичесий сахар для useMemo при воврате функции
+        console.log(books)
+        setBooks([...books, 'Algorithms'])
+    }, [])//если не установить зависимость, будет использовано старое лексическое окружение из замыкания
     return <>
         <button onClick={() => setCounter(counter + 1)}>+1</button>
         {counter}
-        <Books addBook={addBook}/>
+        <Books addBook={memoizedAddBook2}/>
     </>
 
 }
-const Books = (props: { addBook: () => void }) => {
+const Books = React.memo((props: { addBook: () => void }) => {
     console.log('Books')
     return <div>
         <button onClick={() => props.addBook()}>add book</button>
     </div>
-}
+})
+//Lexical Env
