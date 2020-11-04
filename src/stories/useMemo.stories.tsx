@@ -47,11 +47,11 @@ const Users = (props: { users: Array<string> }) => {
     }</div>
 }
 const MemoUsers = React.memo(Users)
-
 export const HelpReactMemo = () => {
     console.log('HelpReactMemo')
     const [counter, setCounter] = useState(-4)
     const [users, setUsers] = useState(['Vova', 'Adil', 'user'])
+
     const memoizedUsers = useMemo(() => {
         return users.filter(user => user.toLowerCase().indexOf('a') > -1)
     }, [users])
@@ -66,4 +66,23 @@ export const HelpReactMemo = () => {
         <button onClick={addUser}>+user</button>
         <MemoUsers users={memoizedUsers}/>
     </>
+}
+
+export const UseCallbackLikeUseState = () => {
+    console.log('UseCallbackLikeUseState')
+    const [counter, setCounter] = useState(80)
+    const [books, setBooks] = useState(['HTML', 'CSS', 'JS'])
+    const addBook = () => setBooks([...books, 'Algorithms'])
+    return <>
+        <button onClick={() => setCounter(counter + 1)}>+1</button>
+        {counter}
+        <Books addBook={addBook}/>
+    </>
+
+}
+const Books = (props: { addBook: () => void }) => {
+    console.log('Books')
+    return <div>
+        <button onClick={() => props.addBook()}>add book</button>
+    </div>
 }
