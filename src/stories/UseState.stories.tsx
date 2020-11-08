@@ -10,8 +10,7 @@ const difficultCountingFunction = () => {
 }
 export const Example1 = () => {
     console.log('Example1')
-    const initValue = difficultCountingFunction() //вызывается
-    const [counter, setCounter] = useState(initValue)
+    const [counter, setCounter] = useState(difficultCountingFunction) //не вызывается
 
     return <>
         <button onClick={() => setCounter(counter + 1)}>+1</button>
