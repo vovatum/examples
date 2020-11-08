@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useMemo, useState} from "react";
 
 export default {
     title: 'useState'
@@ -10,10 +10,12 @@ const difficultCountingFunction = () => {
 }
 export const Example1 = () => {
     console.log('Example1')
-    const [counter, setCounter] = useState(difficultCountingFunction) //не вызывается
+    // const initValue = difficultCountingFunction()
+    const initValue = useMemo(difficultCountingFunction, []) //не вызывается с использованием useMemo
+    const [counter, setCounter] = useState(initValue)
 
     return <>
-        <button onClick={() => setCounter(counter + 1)}>+1</button>
+        <button onClick={() => setCounter(state => state + 1)}>+1</button>
         {counter}
     </>
 }
