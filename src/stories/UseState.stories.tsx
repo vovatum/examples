@@ -11,8 +11,8 @@ const difficultCountingFunction = () => {
 export const Example1 = () => {
     console.log('Example1')
     // const initValue = difficultCountingFunction()
-    const initValue = useMemo(difficultCountingFunction, []) //не вызывается с использованием useMemo
-    const [counter, setCounter] = useState(initValue)
+    // const initValue = useMemo(difficultCountingFunction, []) //не вызывается с использованием useMemo
+    const [counter, setCounter] = useState(difficultCountingFunction)
 
     return <>
         <button onClick={() => setCounter(state => state + 1)}>+1</button>
