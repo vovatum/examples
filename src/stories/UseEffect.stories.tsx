@@ -38,11 +38,27 @@ export const SetTimeoutExample = () => {
             console.log('setTimeout')
             document.title = counter.toString()
         }, 2000)
-    },[counter])
+    }, [counter])
 
     return <>
         <button onClick={() => setCounter(counter + 1)}>counter+1</button>
         <button onClick={() => setFake(fake + 1)}>fake+1</button>
+        counter - {counter} fake - {fake}
+    </>
+}
+export const SetIntervalExample = () => {
+    const [fake, setFake] = useState(23)
+    const [counter, setCounter] = useState(23)
+    console.log('SetIntervalExample')
+
+    useEffect(() => {
+        setInterval(() => {
+            console.log('tick' + counter)
+            setCounter(counter + 1)
+        }, 2000)
+    }, [])
+
+    return <>
         counter - {counter} fake - {fake}
     </>
 }
