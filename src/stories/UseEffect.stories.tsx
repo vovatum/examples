@@ -53,8 +53,8 @@ export const SetIntervalExample = () => {
 
     useEffect(() => {
         setInterval(() => {
-            console.log('tick' + counter)
-            setCounter(counter + 1)
+            console.log('tick' + counter)//берётся начальное значение
+            setCounter(state => state + 1)//changer внутри меняет state и берёт значение оттуда
         }, 2000)
     }, [])
 
