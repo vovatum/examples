@@ -62,3 +62,26 @@ export const SetIntervalExample = () => {
         counter - {counter} fake - {fake}
     </>
 }
+export const SetIntervalClockExample = () => {
+    const [time, setTime] = useState(0)
+    const validTime = (clockTime: string | number) => {
+        return clockTime < 10 ? '0' + clockTime : clockTime
+    }
+    const hours = validTime(new Date().getHours())
+    const minutes = validTime(new Date().getMinutes())
+    const seconds = validTime(new Date().getSeconds())
+    const clock = [hours, minutes, seconds].join(':')
+    useEffect(() => {
+        setInterval(() => {
+            setTime((state) => {
+                console.log(state)
+                return state + 1
+            })//state не придумал как использовать
+        }, 1000)
+    }, [])
+
+    return <>
+        {/*{hours}:{minutes}:{seconds}*/}
+        {clock}
+    </>
+}
