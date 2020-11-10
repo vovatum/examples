@@ -69,14 +69,18 @@ export const SetIntervalClockExample = () => {
         return clockTime < 10 ? '0' + clockTime : clockTime
     }
     useEffect(() => {
-        setInterval(() => {
+        const intervalID = setInterval(() => {
+            console.log('myTick')
             const time = [
                 validTime(new Date().getHours()),
                 validTime(new Date().getMinutes()),
-                validTime(new Date().getSeconds())]
-                .join(':')
+                validTime(new Date().getSeconds())
+            ].join(':')
             setClock(time)
         }, 1000)
+        return () => {
+            clearInterval(intervalID) //stop setInterval 'tick'
+        }
     }, [])
     return <>
         <span style={{color: "red"}}>

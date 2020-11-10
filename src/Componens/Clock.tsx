@@ -7,10 +7,13 @@ const get2digitsString = (num: number) => num < 10 ? '0' + num : num
 export const Clock: React.FC<PropsType> = (props) => {
     const [date, setDate] = useState(new Date())
     useEffect(() => {
-        setInterval(() => {
+        const intervalID = setInterval(() => {
             console.log('tick')
             setDate(new Date())
         }, 1000)
+        return () => {
+            clearInterval(intervalID) //stop setInterval 'tick'
+        }
     }, [])
     return <>
         <span>{get2digitsString(date.getHours())}</span>
