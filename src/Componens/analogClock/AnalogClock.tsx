@@ -4,9 +4,9 @@ import './AnalogClock.css'
 export const AnalogClock = () => {
 
     const [day, setDay] = useState(new Date())
-    let hh = day.getHours()
-    let mm = day.getMinutes()
-    let ss = day.getSeconds()
+    let [hh, mm, ss] = [day.getHours(), day.getMinutes(), day.getSeconds()]
+    const validNum = (num: string | number) => num < 10 ? '0' + num : num
+    const clock = [validNum(hh), validNum(mm), validNum(ss)].join(':')
 
     useEffect(() => {
         const intervalID = setInterval(() => {
@@ -18,6 +18,9 @@ export const AnalogClock = () => {
     }, [])
 
     return <div className={"app"}>
+         <span style={{color: "red"}}>
+            {clock}
+            </span>
         <div className={"body"}>
             <div className="clock">
                 <div className="hour">
