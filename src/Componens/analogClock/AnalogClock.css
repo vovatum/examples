@@ -101,6 +101,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    background: url("clock.png"),
+    radial-gradient(circle, rgb(37, 73, 90) 0%, rgb(25, 48, 60) 11%, rgba(9, 25, 33, 1) 38%);
     background-size: cover;
     color: #ffc600;
     font-family: Calibri, serif;
