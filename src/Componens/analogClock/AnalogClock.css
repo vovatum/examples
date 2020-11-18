@@ -95,3 +95,19 @@
     z-index: 12;
     border-radius: 6px 6px 0 0;
 }
+.digital{
+    width: 350px;
+    height: 350px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    color: #ffc600;
+    font-family: Calibri, serif;
+    font-size: x-large;
+    border-radius: 50%;
+    box-shadow: 0 -15px 15px rgba(134, 134, 134, 0.35),
+    inset 0 -15px 15px #191919,
+    0 15px 15px rgba(134, 134, 134, 0.35),
+    inset 0 15px 15px #191919;
+}
