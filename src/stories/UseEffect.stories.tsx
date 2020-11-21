@@ -113,11 +113,15 @@ export const KeysTrackerExample = () => {
     console.log('Component render with ' + text)
 
     useEffect(() => {
-        window.addEventListener('keypress', (e) => {
+        const handler = (e: { key: string; }) => {
             console.log(e.key)
             setText(state => state + e.key)
-        })
+        }
 
+        window.addEventListener('keypress', handler)
+        return () => {
+            window.removeEventListener('keypress', handler)
+        }
     }, [])
 
     return <>
