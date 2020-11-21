@@ -34,10 +34,13 @@ export const SetTimeoutExample = () => {
     console.log('setTimeoutExample')
 
     useEffect(() => {
-        setTimeout(() => {
+        const interval = setTimeout(() => {
             console.log('setTimeout')
             document.title = counter.toString()
         }, 2000)
+        return () => {
+            clearInterval(interval)
+        }
     }, [counter])
 
     return <>
@@ -115,14 +118,33 @@ export const KeysTrackerExample = () => {
     useEffect(() => {
         const handler = (e: { key: string; }) => {
             console.log(e.key)
-            setText(state => state + e.key)
+            setText(text + e.key)
         }
 
         window.addEventListener('keypress', handler)
         return () => {
             window.removeEventListener('keypress', handler)
         }
-    }, [])
+    }, [text])
+
+    return <>
+        setText: {text}
+    </>
+}
+export const SetTimeoutExample2 = () => {
+    const [text, setText] = useState('')
+
+    console.log('Component render with ' + text)
+
+    useEffect(() => {
+        const timeoutId = setTimeout(() => {
+            console.log('Timeout expired')
+            setText('3 second passed')
+        }, 3000)
+        return () => {
+            clearTimeout(timeoutId)
+        }
+    }, [text])
 
     return <>
         setText: {text}
