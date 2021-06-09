@@ -4,12 +4,14 @@ export default {
     title: 'React.memo'
 }
 
-const NewMessagesCounter = (props: { count: number }) => {
+const NewMessagesCounter = React.memo((props: { count: number }) => {
+    console.log('counter')
     return <div>
         {props.count}
     </div>
-}
-const UsersSecret = (props: { users: Array<string> }) => {
+})
+
+const Users = React.memo((props: { users: Array<string> }) => {
     console.log('USERS')
     return <div>{
         props.users.map((user, index) =>
@@ -18,11 +20,10 @@ const UsersSecret = (props: { users: Array<string> }) => {
             </div>
         )
     }</div>
-}
-const Users = React.memo(UsersSecret)
+})
 
 export const Example1 = () => {
-    console.log('Example1')
+    // console.log('Example1')
     const [counter, setCounter] = useState(-4)
     const [users, setUsers] = useState(['user', 'user', 'user'])
     const addUser = () => {
